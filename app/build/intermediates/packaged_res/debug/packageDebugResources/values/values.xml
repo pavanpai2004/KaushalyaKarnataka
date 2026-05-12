@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#10B981</color>
+    <color name="background">#F8FAFC</color>
+    <color name="primary">#2563EB</color>
+    <color name="secondary">#F59E0B</color>
+    <color name="text_primary">#1F2937</color>
+    <string name="app_name">Kaushalya Karnataka</string>
+    <style name="Theme.KaushalyaKarnataka" parent="android:Theme.Material.Light.NoActionBar"/>
+</resources>

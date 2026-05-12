@@ -1,0 +1,191 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.kaushalya.karnataka"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:4:5-67
+11-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:4:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:5:5-79
+12-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:5:22-76
+13    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+13-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:6:5-76
+13-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:6:22-73
+14    <uses-permission
+14-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:7:5-8:38
+15        android:name="android.permission.READ_EXTERNAL_STORAGE"
+15-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:7:22-77
+16        android:maxSdkVersion="32" />
+16-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:8:9-35
+17    <uses-permission android:name="android.permission.VIBRATE" />
+17-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:9:5-66
+17-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:9:22-63
+18    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+18-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:10:5-79
+18-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:10:22-76
+19    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+19-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:11:5-81
+19-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:11:22-78
+20
+21    <permission
+21-->[androidx.core:core:1.13.1] C:\Users\pavan\.gradle\caches\transforms-3\0bda7b065c90ddd830924ce31a537184\transformed\core-1.13.1\AndroidManifest.xml:22:5-24:47
+22        android:name="com.kaushalya.karnataka.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+22-->[androidx.core:core:1.13.1] C:\Users\pavan\.gradle\caches\transforms-3\0bda7b065c90ddd830924ce31a537184\transformed\core-1.13.1\AndroidManifest.xml:23:9-81
+23        android:protectionLevel="signature" />
+23-->[androidx.core:core:1.13.1] C:\Users\pavan\.gradle\caches\transforms-3\0bda7b065c90ddd830924ce31a537184\transformed\core-1.13.1\AndroidManifest.xml:24:9-44
+24
+25    <uses-permission android:name="com.kaushalya.karnataka.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+25-->[androidx.core:core:1.13.1] C:\Users\pavan\.gradle\caches\transforms-3\0bda7b065c90ddd830924ce31a537184\transformed\core-1.13.1\AndroidManifest.xml:26:5-97
+25-->[androidx.core:core:1.13.1] C:\Users\pavan\.gradle\caches\transforms-3\0bda7b065c90ddd830924ce31a537184\transformed\core-1.13.1\AndroidManifest.xml:26:22-94
+26
+27    <application
+27-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:13:5-33:19
+28        android:name="com.kaushalya.karnataka.KaushalyaApp"
+28-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:14:9-37
+29        android:allowBackup="true"
+29-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:15:9-35
+30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+30-->[androidx.core:core:1.13.1] C:\Users\pavan\.gradle\caches\transforms-3\0bda7b065c90ddd830924ce31a537184\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
+31        android:debuggable="true"
+32        android:extractNativeLibs="false"
+33        android:icon="@mipmap/ic_launcher"
+33-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:16:9-43
+34        android:label="@string/app_name"
+34-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:17:9-41
+35        android:roundIcon="@mipmap/ic_launcher_round"
+35-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:18:9-54
+36        android:supportsRtl="true"
+36-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:19:9-35
+37        android:testOnly="true"
+38        android:theme="@style/Theme.KaushalyaKarnataka"
+38-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:20:9-56
+39        android:usesCleartextTraffic="false" >
+39-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:21:9-45
+40        <activity
+40-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:23:9-31:20
+41            android:name="com.kaushalya.karnataka.MainActivity"
+41-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:24:13-41
+42            android:exported="true"
+42-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:25:13-36
+43            android:windowSoftInputMode="adjustResize" >
+43-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:26:13-55
+44            <intent-filter>
+44-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:27:13-30:29
+45                <action android:name="android.intent.action.MAIN" />
+45-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:28:17-69
+45-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:28:25-66
+46
+47                <category android:name="android.intent.category.LAUNCHER" />
+47-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:29:17-77
+47-->C:\Users\pavan\IdeaProjects\KaushalyaKarnataka\app\src\main\AndroidManifest.xml:29:27-74
+48            </intent-filter>
+49        </activity>
+50
+51        <provider
+51-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:9:9-17:20
+52            android:name="androidx.startup.InitializationProvider"
+52-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:10:13-67
+53            android:authorities="com.kaushalya.karnataka.androidx-startup"
+53-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:11:13-68
+54            android:exported="false" >
+54-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:12:13-37
+55            <meta-data
+55-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:14:13-16:52
+56                android:name="io.github.jan.supabase.storage.SupabaseInitializer"
+56-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:15:17-82
+57                android:value="androidx.startup" />
+57-->[io.github.jan-tennert.supabase:storage-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\a699afd281e71ad3565cd98124b498c4\transformed\storage-kt-debug\AndroidManifest.xml:16:17-49
+58            <meta-data
+58-->[io.github.jan-tennert.supabase:gotrue-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\1388bf87473fd2b4d90e8b532f0ed6e7\transformed\gotrue-kt-debug\AndroidManifest.xml:14:13-16:52
+59                android:name="io.github.jan.supabase.gotrue.SupabaseInitializer"
+59-->[io.github.jan-tennert.supabase:gotrue-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\1388bf87473fd2b4d90e8b532f0ed6e7\transformed\gotrue-kt-debug\AndroidManifest.xml:15:17-81
+60                android:value="androidx.startup" />
+60-->[io.github.jan-tennert.supabase:gotrue-kt-android-debug:2.5.0] C:\Users\pavan\.gradle\caches\transforms-3\1388bf87473fd2b4d90e8b532f0ed6e7\transformed\gotrue-kt-debug\AndroidManifest.xml:16:17-49
+61            <meta-data
+61-->[androidx.emoji2:emoji2:1.3.0] C:\Users\pavan\.gradle\caches\transforms-3\ab915c7ee9e236a3f623d03ae55e6306\transformed\emoji2-1.3.0\AndroidManifest.xml:29:13-31:52
+62                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+62-->[androidx.emoji2:emoji2:1.3.0] C:\Users\pavan\.gradle\caches\transforms-3\ab915c7ee9e236a3f623d03ae55e6306\transformed\emoji2-1.3.0\AndroidManifest.xml:30:17-75
+63                android:value="androidx.startup" />
+63-->[androidx.emoji2:emoji2:1.3.0] C:\Users\pavan\.gradle\caches\transforms-3\ab915c7ee9e236a3f623d03ae55e6306\transformed\emoji2-1.3.0\AndroidManifest.xml:31:17-49
+64            <meta-data
+64-->[androidx.lifecycle:lifecycle-process:2.8.1] C:\Users\pavan\.gradle\caches\transforms-3\30603adb6a1ac9e89aef7358ab888aef\transformed\lifecycle-process-2.8.1\AndroidManifest.xml:29:13-31:52
+65                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+65-->[androidx.lifecycle:lifecycle-process:2.8.1] C:\Users\pavan\.gradle\caches\transforms-3\30603adb6a1ac9e89aef7358ab888aef\transformed\lifecycle-process-2.8.1\AndroidManifest.xml:30:17-78
+66                android:value="androidx.startup" />
+66-->[androidx.lifecycle:lifecycle-process:2.8.1] C:\Users\pavan\.gradle\caches\transforms-3\30603adb6a1ac9e89aef7358ab888aef\transformed\lifecycle-process-2.8.1\AndroidManifest.xml:31:17-49
+67            <meta-data
+67-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:29:13-31:52
+68                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+68-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:30:17-85
+69                android:value="androidx.startup" />
+69-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:31:17-49
+70            <meta-data
+70-->[com.russhwolf:multiplatform-settings-no-arg-android-debug:1.1.1] C:\Users\pavan\.gradle\caches\transforms-3\408eb1fc9d7ff375df2aa162ee0fa01b\transformed\multiplatform-settings-no-arg-debug\AndroidManifest.xml:29:13-31:52
+71                android:name="com.russhwolf.settings.SettingsInitializer"
+71-->[com.russhwolf:multiplatform-settings-no-arg-android-debug:1.1.1] C:\Users\pavan\.gradle\caches\transforms-3\408eb1fc9d7ff375df2aa162ee0fa01b\transformed\multiplatform-settings-no-arg-debug\AndroidManifest.xml:30:17-74
+72                android:value="androidx.startup" />
+72-->[com.russhwolf:multiplatform-settings-no-arg-android-debug:1.1.1] C:\Users\pavan\.gradle\caches\transforms-3\408eb1fc9d7ff375df2aa162ee0fa01b\transformed\multiplatform-settings-no-arg-debug\AndroidManifest.xml:31:17-49
+73        </provider>
+74
+75        <activity
+75-->[androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\pavan\.gradle\caches\transforms-3\e8ca0963e9adc52565a096e75276385d\transformed\ui-tooling-release\AndroidManifest.xml:23:9-25:39
+76            android:name="androidx.compose.ui.tooling.PreviewActivity"
+76-->[androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\pavan\.gradle\caches\transforms-3\e8ca0963e9adc52565a096e75276385d\transformed\ui-tooling-release\AndroidManifest.xml:24:13-71
+77            android:exported="true" />
+77-->[androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\pavan\.gradle\caches\transforms-3\e8ca0963e9adc52565a096e75276385d\transformed\ui-tooling-release\AndroidManifest.xml:25:13-36
+78
+79        <service
+79-->[androidx.room:room-runtime:2.6.1] C:\Users\pavan\.gradle\caches\transforms-3\b418dcfe691bc58d955027ca519d5b83\transformed\room-runtime-2.6.1\AndroidManifest.xml:24:9-28:63
+80            android:name="androidx.room.MultiInstanceInvalidationService"
+80-->[androidx.room:room-runtime:2.6.1] C:\Users\pavan\.gradle\caches\transforms-3\b418dcfe691bc58d955027ca519d5b83\transformed\room-runtime-2.6.1\AndroidManifest.xml:25:13-74
+81            android:directBootAware="true"
+81-->[androidx.room:room-runtime:2.6.1] C:\Users\pavan\.gradle\caches\transforms-3\b418dcfe691bc58d955027ca519d5b83\transformed\room-runtime-2.6.1\AndroidManifest.xml:26:13-43
+82            android:exported="false" />
+82-->[androidx.room:room-runtime:2.6.1] C:\Users\pavan\.gradle\caches\transforms-3\b418dcfe691bc58d955027ca519d5b83\transformed\room-runtime-2.6.1\AndroidManifest.xml:27:13-37
+83
+84        <receiver
+84-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:34:9-52:20
+85            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+85-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:35:13-76
+86            android:directBootAware="false"
+86-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:36:13-44
+87            android:enabled="true"
+87-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:37:13-35
+88            android:exported="true"
+88-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:38:13-36
+89            android:permission="android.permission.DUMP" >
+89-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:39:13-57
+90            <intent-filter>
+90-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:40:13-42:29
+91                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+91-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:17-91
+91-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:41:25-88
+92            </intent-filter>
+93            <intent-filter>
+93-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:43:13-45:29
+94                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+94-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:17-85
+94-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:44:25-82
+95            </intent-filter>
+96            <intent-filter>
+96-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:46:13-48:29
+97                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+97-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:17-88
+97-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:47:25-85
+98            </intent-filter>
+99            <intent-filter>
+99-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:49:13-51:29
+100                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+100-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:17-95
+100-->[androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\pavan\.gradle\caches\transforms-3\833922dba558276aef162bca0078c640\transformed\profileinstaller-1.3.1\AndroidManifest.xml:50:25-92
+101            </intent-filter>
+102        </receiver>
+103    </application>
+104
+105</manifest>
