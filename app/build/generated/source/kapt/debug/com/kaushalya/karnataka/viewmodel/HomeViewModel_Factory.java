@@ -1,5 +1,6 @@
 package com.kaushalya.karnataka.viewmodel;
 
+import com.kaushalya.karnataka.data.repository.AuthRepository;
 import com.kaushalya.karnataka.data.repository.SupabaseRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -24,20 +25,25 @@ import javax.inject.Provider;
 public final class HomeViewModel_Factory implements Factory<HomeViewModel> {
   private final Provider<SupabaseRepository> repositoryProvider;
 
-  public HomeViewModel_Factory(Provider<SupabaseRepository> repositoryProvider) {
+  private final Provider<AuthRepository> authRepoProvider;
+
+  public HomeViewModel_Factory(Provider<SupabaseRepository> repositoryProvider,
+      Provider<AuthRepository> authRepoProvider) {
     this.repositoryProvider = repositoryProvider;
+    this.authRepoProvider = authRepoProvider;
   }
 
   @Override
   public HomeViewModel get() {
-    return newInstance(repositoryProvider.get());
+    return newInstance(repositoryProvider.get(), authRepoProvider.get());
   }
 
-  public static HomeViewModel_Factory create(Provider<SupabaseRepository> repositoryProvider) {
-    return new HomeViewModel_Factory(repositoryProvider);
+  public static HomeViewModel_Factory create(Provider<SupabaseRepository> repositoryProvider,
+      Provider<AuthRepository> authRepoProvider) {
+    return new HomeViewModel_Factory(repositoryProvider, authRepoProvider);
   }
 
-  public static HomeViewModel newInstance(SupabaseRepository repository) {
-    return new HomeViewModel(repository);
+  public static HomeViewModel newInstance(SupabaseRepository repository, AuthRepository authRepo) {
+    return new HomeViewModel(repository, authRepo);
   }
 }

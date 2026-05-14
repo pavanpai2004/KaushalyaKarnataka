@@ -169,22 +169,44 @@ class WorkerViewModel @Inject constructor(
         viewModelScope.launch {
             _saveState.value = UiState.Loading
             supabaseRepo.addReview(workerId, review).fold(
-                onSuccess = { _saveState.value = UiState.Success(Unit) },
+                onSuccess = {
+                    _saveState.value = UiState.Success(Unit)
+                    // Reload worker data so the profile card shows updated rating
+                    loadWorker(workerId)
+                },
                 onFailure = { _saveState.value = UiState.Error(it.message ?: "Review failed") }
             )
         }
     }
 
-    fun sendHireRequest(workerId: String, customerName: String, customerPhone: String, serviceRequested: String, description: String = "") {
+    fun sendHireRequest(workerId: String, serviceRequested: String, description: String = "", preferredTiming: String = "") {
         viewModelScope.launch {
             _hireState.value = UiState.Loading
+
+            // Get name/phone from auth metadata first
+            var customerName = authRepo.currentUserName
+            var customerPhone = authRepo.currentUserPhone
+
+            // Fallback: if metadata is empty (existing users), try workers table
+            if (customerName.isBlank() || customerPhone.isBlank()) {
+                try {
+                    supabaseRepo.getWorkerById(authRepo.currentUserId).collect { worker ->
+                        if (worker != null) {
+                            if (customerName.isBlank()) customerName = worker.name
+                            if (customerPhone.isBlank()) customerPhone = worker.phone
+                        }
+                    }
+                } catch (_: Exception) { }
+            }
+
             val request = HireRequest(
                 workerId = workerId,
                 customerId = authRepo.currentUserId,
                 customerName = customerName,
                 customerPhone = customerPhone,
                 serviceRequested = serviceRequested,
-                description = description
+                description = description,
+                preferredTiming = preferredTiming
             )
             supabaseRepo.sendHireRequest(request).fold(
                 onSuccess = { _hireState.value = UiState.Success(Unit) },

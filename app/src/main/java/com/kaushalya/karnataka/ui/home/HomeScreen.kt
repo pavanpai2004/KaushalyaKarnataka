@@ -14,9 +14,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.kaushalya.karnataka.data.model.TradeCategories
 import com.kaushalya.karnataka.ui.components.*
 import com.kaushalya.karnataka.ui.theme.*
@@ -38,6 +41,14 @@ fun HomeScreen(
     val errorMessage by homeViewModel.errorMessage.collectAsState()
 
     val categories = listOf("All") + TradeCategories.list
+
+    // Refresh worker list every time the home screen resumes (e.g., after reviewing a worker)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            homeViewModel.loadWorkers()
+        }
+    }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),

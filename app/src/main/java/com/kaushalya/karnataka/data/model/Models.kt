@@ -57,6 +57,7 @@ data class HireRequest(
     @SerialName("customer_phone") val customerPhone: String = "",
     @SerialName("service_requested") val serviceRequested: String = "",
     @SerialName("description") val description: String = "",
+    @SerialName("preferred_timing") val preferredTiming: String = "",
     @SerialName("status") val status: String = "Pending",
     @SerialName("created_at") val createdAt: String? = null,
     @SerialName("updated_at") val updatedAt: String? = null

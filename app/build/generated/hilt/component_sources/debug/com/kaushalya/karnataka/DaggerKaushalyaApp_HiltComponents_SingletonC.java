@@ -484,7 +484,7 @@ public final class DaggerKaushalyaApp_HiltComponents_SingletonC {
           return (T) new AuthViewModel(singletonCImpl.authRepositoryProvider.get());
 
           case 1: // com.kaushalya.karnataka.viewmodel.HomeViewModel 
-          return (T) new HomeViewModel(singletonCImpl.supabaseRepositoryProvider.get());
+          return (T) new HomeViewModel(singletonCImpl.supabaseRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());
 
           case 2: // com.kaushalya.karnataka.viewmodel.WorkerViewModel 
           return (T) new WorkerViewModel(singletonCImpl.supabaseRepositoryProvider.get(), singletonCImpl.geminiRepositoryProvider.get(), singletonCImpl.authRepositoryProvider.get());

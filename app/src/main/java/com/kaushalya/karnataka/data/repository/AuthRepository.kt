@@ -7,6 +7,9 @@ import io.github.jan.supabase.gotrue.user.UserInfo
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.jsonPrimitive
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -16,12 +19,28 @@ class AuthRepository @Inject constructor(
 ) {
     val currentUser: UserInfo? get() = supabase.auth.currentUserOrNull()
     val isLoggedIn: Boolean get() = supabase.auth.currentSessionOrNull() != null
+
+    val currentUserName: String get() {
+        val metadata = supabase.auth.currentUserOrNull()?.userMetadata
+        return try { metadata?.get("name")?.jsonPrimitive?.content ?: "" } catch (_: Exception) { "" }
+    }
+
+    val currentUserPhone: String get() {
+        val metadata = supabase.auth.currentUserOrNull()?.userMetadata
+        return try { metadata?.get("phone")?.jsonPrimitive?.content ?: "" } catch (_: Exception) { "" }
+    }
     val currentUserId: String get() = supabase.auth.currentUserOrNull()?.id ?: ""
 
-    suspend fun signUp(email: String, password: String): Result<UserInfo> = runCatching {
+    suspend fun signUp(email: String, password: String, name: String = "", phone: String = ""): Result<UserInfo> = runCatching {
         supabase.auth.signUpWith(Email) {
             this.email = email
             this.password = password
+            if (name.isNotBlank() || phone.isNotBlank()) {
+                this.data = buildJsonObject {
+                    if (name.isNotBlank()) put("name", JsonPrimitive(name))
+                    if (phone.isNotBlank()) put("phone", JsonPrimitive(phone))
+                }
+            }
         }
         supabase.auth.currentUserOrNull() ?: throw Exception("Sign up failed: null user")
     }

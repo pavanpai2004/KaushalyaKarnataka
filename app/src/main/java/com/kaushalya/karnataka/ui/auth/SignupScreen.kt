@@ -149,29 +149,35 @@ fun SignupScreen(
 
             Divider()
 
+            // Common name/phone fields for both modes
+            Text(
+                if (isWorkerMode) "Worker Details" else "Your Details",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.Bold
+            )
+
+            OutlinedTextField(
+                value = name,
+                onValueChange = { name = it },
+                label = { Text("Full Name *") },
+                leadingIcon = { Icon(Icons.Default.Person, null) },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
+            )
+
+            OutlinedTextField(
+                value = phone,
+                onValueChange = { phone = it.filter { c -> c.isDigit() }.take(10) },
+                label = { Text("Phone Number *") },
+                leadingIcon = { Icon(Icons.Default.Phone, null) },
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
+            )
+
             if (isWorkerMode) {
-                Text("Worker Details", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-
-                OutlinedTextField(
-                    value = name,
-                    onValueChange = { name = it },
-                    label = { Text("Full Name *") },
-                    leadingIcon = { Icon(Icons.Default.Person, null) },
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp)
-                )
-
-                OutlinedTextField(
-                    value = phone,
-                    onValueChange = { phone = it.filter { c -> c.isDigit() }.take(10) },
-                    label = { Text("Phone Number *") },
-                    leadingIcon = { Icon(Icons.Default.Phone, null) },
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
-                    singleLine = true,
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = RoundedCornerShape(12.dp)
-                )
 
                 OutlinedTextField(
                     value = location,
@@ -258,9 +264,10 @@ fun SignupScreen(
             val isLoading = authState is UiState.Loading || saveState is UiState.Loading
 
             Button(
-                onClick = { authViewModel.signUp(email.trim(), password) },
+                onClick = { authViewModel.signUp(email.trim(), password, name.trim(), phone.trim()) },
                 enabled = !isLoading && email.isNotBlank() && password.length >= 6 &&
-                        (!isWorkerMode || (name.isNotBlank() && selectedCategory.isNotBlank())),
+                        name.isNotBlank() && phone.isNotBlank() &&
+                        (!isWorkerMode || selectedCategory.isNotBlank()),
                 modifier = Modifier.fillMaxWidth().height(52.dp),
                 shape = RoundedCornerShape(12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = PrimaryBlue)

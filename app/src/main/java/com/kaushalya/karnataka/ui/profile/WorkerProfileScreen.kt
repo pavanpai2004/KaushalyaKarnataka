@@ -17,9 +17,12 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import coil.compose.AsyncImage
 import com.kaushalya.karnataka.data.model.UiState
 import com.kaushalya.karnataka.ui.components.*
@@ -43,7 +46,13 @@ fun WorkerProfileScreen(
     var showHireDialog by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
 
-    LaunchedEffect(workerId) { viewModel.loadWorker(workerId) }
+    // Reload worker data every time the screen resumes (e.g., back from ReviewScreen)
+    val lifecycleOwner = LocalLifecycleOwner.current
+    LaunchedEffect(lifecycleOwner) {
+        lifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.RESUMED) {
+            viewModel.loadWorker(workerId)
+        }
+    }
 
     LaunchedEffect(hireState) {
         if (hireState is UiState.Success) {
@@ -130,11 +139,19 @@ fun WorkerProfileScreen(
                                     )
                                 }
 
+                                // Compute rating from loaded reviews for real-time accuracy
+                                val displayRating = if (reviews.isNotEmpty()) {
+                                    reviews.map { it.rating.toDouble() }.average()
+                                } else {
+                                    worker.averageRating
+                                }
+                                val displayTotalRatings = if (reviews.isNotEmpty()) reviews.size else worker.totalRatings
+
                                 Row(verticalAlignment = Alignment.CenterVertically) {
-                                    RatingStars(worker.averageRating.toFloat(), size = 20)
+                                    RatingStars(displayRating.toFloat(), size = 20)
                                     Spacer(Modifier.width(8.dp))
                                     Text(
-                                        "${String.format("%.1f", worker.averageRating)} (${worker.totalRatings} ratings)",
+                                        "${String.format("%.1f", displayRating)} ($displayTotalRatings ratings)",
                                         style = MaterialTheme.typography.bodyMedium
                                     )
                                 }
@@ -293,10 +310,9 @@ fun WorkerProfileScreen(
 
     // Hire Me dialog
     if (showHireDialog) {
-        var customerName by remember { mutableStateOf("") }
-        var customerPhone by remember { mutableStateOf("") }
         var serviceName by remember { mutableStateOf("") }
         var description by remember { mutableStateOf("") }
+        var preferredTiming by remember { mutableStateOf("") }
 
         AlertDialog(
             onDismissRequest = { showHireDialog = false },
@@ -304,25 +320,10 @@ fun WorkerProfileScreen(
             text = {
                 Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     OutlinedTextField(
-                        value = customerName,
-                        onValueChange = { customerName = it },
-                        label = { Text("Your Name *") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    OutlinedTextField(
-                        value = customerPhone,
-                        onValueChange = { customerPhone = it.filter { c -> c.isDigit() }.take(10) },
-                        label = { Text("Your Phone *") },
-                        singleLine = true,
-                        modifier = Modifier.fillMaxWidth(),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-                    OutlinedTextField(
                         value = serviceName,
                         onValueChange = { serviceName = it },
                         label = { Text("Service Needed *") },
+                        placeholder = { Text("e.g., Fan Installation") },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(10.dp)
@@ -331,8 +332,18 @@ fun WorkerProfileScreen(
                         value = description,
                         onValueChange = { description = it },
                         label = { Text("Description (optional)") },
+                        placeholder = { Text("Describe your requirement…") },
                         minLines = 2,
                         maxLines = 3,
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(10.dp)
+                    )
+                    OutlinedTextField(
+                        value = preferredTiming,
+                        onValueChange = { preferredTiming = it },
+                        label = { Text("Preferred Timing *") },
+                        placeholder = { Text("e.g., Tomorrow 10 AM - 12 PM") },
+                        singleLine = true,
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(10.dp)
                     )
@@ -341,10 +352,10 @@ fun WorkerProfileScreen(
             confirmButton = {
                 Button(
                     onClick = {
-                        viewModel.sendHireRequest(workerId, customerName, customerPhone, serviceName, description)
+                        viewModel.sendHireRequest(workerId, serviceName, description, preferredTiming)
                         showHireDialog = false
                     },
-                    enabled = customerName.isNotBlank() && customerPhone.isNotBlank() && serviceName.isNotBlank(),
+                    enabled = serviceName.isNotBlank() && preferredTiming.isNotBlank(),
                     colors = ButtonDefaults.buttonColors(containerColor = AccentGreen)
                 ) { Text("Send Request") }
             },

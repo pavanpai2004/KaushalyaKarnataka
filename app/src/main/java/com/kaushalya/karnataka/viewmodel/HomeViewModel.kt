@@ -2,7 +2,9 @@ package com.kaushalya.karnataka.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kaushalya.karnataka.data.model.Review
 import com.kaushalya.karnataka.data.model.Worker
+import com.kaushalya.karnataka.data.repository.AuthRepository
 import com.kaushalya.karnataka.data.repository.SupabaseRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val repository: SupabaseRepository
+    private val repository: SupabaseRepository,
+    private val authRepo: AuthRepository
 ) : ViewModel() {
 
     private val _searchQuery = MutableStateFlow("")
@@ -32,16 +35,19 @@ class HomeViewModel @Inject constructor(
     val errorMessage: StateFlow<String?> = _errorMessage
 
     // Filtered workers derived from all workers + search + category
+    // Excludes the currently logged-in user's own worker card
     val filteredWorkers: StateFlow<List<Worker>> = combine(
         _allWorkers, _searchQuery, _selectedCategory
     ) { workers, query, category ->
+        val currentUserId = authRepo.currentUserId
         workers.filter { worker ->
+            val isNotSelf = currentUserId.isBlank() || worker.id != currentUserId
             val matchesCategory = category == "All" || worker.tradeCategory == category
             val matchesQuery = query.isBlank() ||
                     worker.name.contains(query, ignoreCase = true) ||
                     worker.tradeCategory.contains(query, ignoreCase = true) ||
                     worker.location.contains(query, ignoreCase = true)
-            matchesCategory && matchesQuery
+            isNotSelf && matchesCategory && matchesQuery
         }
     }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
@@ -55,7 +61,27 @@ class HomeViewModel @Inject constructor(
             _errorMessage.value = null
             try {
                 repository.getAllWorkers().collect { workers ->
-                    _allWorkers.value = workers
+                    // Load all reviews to compute accurate ratings
+                    try {
+                        repository.getAllReviews().collect { allReviews ->
+                            val reviewsByWorker = allReviews.groupBy { it.workerId }
+                            val workersWithRatings = workers.map { worker ->
+                                val workerReviews = reviewsByWorker[worker.id]
+                                if (workerReviews != null && workerReviews.isNotEmpty()) {
+                                    worker.copy(
+                                        averageRating = workerReviews.map { it.rating.toDouble() }.average(),
+                                        totalRatings = workerReviews.size
+                                    )
+                                } else {
+                                    worker
+                                }
+                            }
+                            _allWorkers.value = workersWithRatings
+                        }
+                    } catch (_: Exception) {
+                        // If reviews fail to load, still show workers with DB ratings
+                        _allWorkers.value = workers
+                    }
                     _isLoading.value = false
                 }
             } catch (e: Exception) {

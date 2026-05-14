@@ -2,6 +2,7 @@ package com.kaushalya.karnataka.data.repository
 
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.postgrest
+import io.github.jan.supabase.postgrest.rpc
 import io.github.jan.supabase.postgrest.query.Order
 import io.github.jan.supabase.storage.storage
 import com.kaushalya.karnataka.data.model.HireRequest
@@ -11,6 +12,8 @@ import com.kaushalya.karnataka.data.model.Service
 import com.kaushalya.karnataka.data.model.Worker
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -108,6 +111,13 @@ class SupabaseRepository @Inject constructor(
 
     // ─── Reviews ─────────────────────────────────────────────────────────────
 
+    fun getAllReviews(): Flow<List<Review>> = flow {
+        val reviews = supabase.postgrest["reviews"]
+            .select()
+            .decodeList<Review>()
+        emit(reviews)
+    }
+
     fun getReviewsForWorker(workerId: String): Flow<List<Review>> = flow {
         val reviews = supabase.postgrest["reviews"]
             .select {
@@ -121,26 +131,11 @@ class SupabaseRepository @Inject constructor(
     suspend fun addReview(workerId: String, review: Review): Result<Unit> = runCatching {
         supabase.postgrest["reviews"].insert(review.copy(workerId = workerId))
 
-        // Update worker average rating client-side
-        val worker = supabase.postgrest["workers"]
-            .select { filter { eq("id", workerId) } }
-            .decodeSingleOrNull<Worker>()
-
-        if (worker != null) {
-            val currentAvg = worker.averageRating
-            val currentCount = worker.totalRatings
-            val newCount = currentCount + 1
-            val newAvg = ((currentAvg * currentCount) + review.rating) / newCount
-
-            supabase.postgrest["workers"].update(
-                {
-                    set("average_rating", newAvg)
-                    set("total_ratings", newCount)
-                }
-            ) {
-                filter { eq("id", workerId) }
-            }
-        }
+        // Call RPC function to recalculate worker rating (SECURITY DEFINER bypasses RLS)
+        supabase.postgrest.rpc(
+            "update_worker_rating",
+            buildJsonObject { put("p_worker_id", workerId) }
+        )
     }
 
     // ─── Hire Requests ─────────────────────────────────────────────────────────

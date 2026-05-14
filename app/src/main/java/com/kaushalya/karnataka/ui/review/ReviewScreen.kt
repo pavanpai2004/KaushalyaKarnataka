@@ -30,7 +30,7 @@ fun ReviewScreen(
 ) {
     var selectedRating by remember { mutableStateOf(0f) }
     var reviewText by remember { mutableStateOf("") }
-    var customerName by remember { mutableStateOf("") }
+    var customerName by remember { mutableStateOf(authViewModel.currentUserName) }
     var isRecommended by remember { mutableStateOf(true) }
 
     val saveState by workerViewModel.saveState.collectAsState()

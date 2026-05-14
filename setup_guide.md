@@ -168,6 +168,7 @@ CREATE TABLE public.hire_requests (
     customer_phone TEXT NOT NULL DEFAULT '',
     service_requested TEXT NOT NULL DEFAULT '',
     description TEXT DEFAULT '',
+    preferred_timing TEXT DEFAULT '',
     status TEXT DEFAULT 'Pending',
     created_at TIMESTAMPTZ DEFAULT now(),
     updated_at TIMESTAMPTZ DEFAULT now()
@@ -229,7 +230,10 @@ CREATE TRIGGER trigger_hire_requests_updated_at
 
 ```sql
 CREATE OR REPLACE FUNCTION public.recalculate_worker_rating()
-RETURNS TRIGGER AS $$
+RETURNS TRIGGER
+SECURITY DEFINER
+SET search_path = public
+AS $$
 DECLARE
     avg_val DOUBLE PRECISION;
     count_val INTEGER;
@@ -247,6 +251,9 @@ BEGIN
     RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Drop and recreate trigger to ensure it uses the updated function
+DROP TRIGGER IF EXISTS trigger_recalculate_rating ON public.reviews;
 
 CREATE TRIGGER trigger_recalculate_rating
     AFTER INSERT OR DELETE ON public.reviews

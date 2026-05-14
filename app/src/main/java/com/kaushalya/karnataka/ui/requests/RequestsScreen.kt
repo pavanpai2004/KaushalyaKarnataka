@@ -144,6 +144,15 @@ fun RequestCard(
                 Text(request.description, style = MaterialTheme.typography.bodySmall, color = TextMedium)
             }
 
+            if (request.preferredTiming.isNotEmpty()) {
+                Spacer(Modifier.height(4.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.Schedule, null, modifier = Modifier.size(14.dp), tint = PrimaryBlue)
+                    Spacer(Modifier.width(4.dp))
+                    Text("Timing: ${request.preferredTiming}", style = MaterialTheme.typography.bodySmall, color = PrimaryBlue, fontWeight = FontWeight.Medium)
+                }
+            }
+
             if (request.status == RequestStatus.PENDING) {
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

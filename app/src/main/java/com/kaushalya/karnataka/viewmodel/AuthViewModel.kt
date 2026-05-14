@@ -26,11 +26,13 @@ class AuthViewModel @Inject constructor(
     val currentUser get() = authRepo.currentUser
     val isLoggedIn get() = authRepo.isLoggedIn
     val currentUserId get() = authRepo.currentUserId
+    val currentUserName get() = authRepo.currentUserName
+    val currentUserPhone get() = authRepo.currentUserPhone
 
-    fun signUp(email: String, password: String) {
+    fun signUp(email: String, password: String, name: String = "", phone: String = "") {
         viewModelScope.launch {
             _authState.value = UiState.Loading
-            authRepo.signUp(email, password).fold(
+            authRepo.signUp(email, password, name, phone).fold(
                 onSuccess = { _authState.value = UiState.Success(it) },
                 onFailure = { _authState.value = UiState.Error(it.message ?: "Sign up failed") }
             )
